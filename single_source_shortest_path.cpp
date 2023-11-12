@@ -1,10 +1,15 @@
+#include <iostream>
+#include <utility>
+#include <vector>
+#include <queue>
+using namespace std;
 class Graph {
 public:
     //global adjacency list
-    vector<vector<pair<int, int>>> adjList;
-    Graph(int n, vector<vector<int>>& edges) {
+    vector<vector<pair<int, int> > > adjList;
+    Graph(int n, vector<vector< int > >& edges) {
         adjList.resize(n);
-        for(auto& edge : edges)
+        for(auto& edge: edges)
             adjList[edge[0]].push_back(make_pair(edge[1], edge[2]));
     }
     
@@ -33,12 +38,12 @@ public:
         **/
         
         // greater yields total order
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+        priority_queue<vector<int>, vector<vector<int> >, greater<vector<int> > > pq;
 
         //step 1
         vector<int> costForNode(n, INT_MAX);
         costForNode[node1] = 0;
-        pq.push({0, node1});
+        pq.push(vector<int>(0, node1));
 
         while(!pq.empty())
         {
@@ -54,7 +59,7 @@ public:
                 return currCost;
             }
 
-            for(auto& neighbor : adjList[currNode]) {
+            for(auto& neighbor: adjList[currNode]) {
                 int node = neighbor.first;
                 int cost = neighbor.second;
                 int newCost = currCost + cost;
@@ -62,7 +67,7 @@ public:
                 if(newCost < costForNode[node])
                 {
                     costForNode[node] = newCost;
-                    pq.push({newCost, node});
+                    pq.push(vector<int>(newCost, node));
                 }
             }
         }
