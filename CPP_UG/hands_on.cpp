@@ -1,21 +1,11 @@
 #include <iostream> 
 #include <cstdlib> // C standard library, defines rand(), srand(), RAND_MAX
-#include <ctime>
+#include <cctype>
 using namespace std;
 
-void swap(int& p, int& q)
-{
-    int t;
-    t = p;
-    p = q;
-    q = t;
-}
 int main() {
-    //swap function
-    int a = 3;
-    int b = 5;
-    swap(a, b);
-    cout << "a is " << a << "\n";
-    cout << "b is " << b << "\n";
+    //String manipulation
+    char helloworld[] = {'H', 'E', 'L', 'L', 'O', 'W', 'O', 'R', 'L', 'D', '\0'};
+    cout << helloworld << "\n";
     return 0;
 }
