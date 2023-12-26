@@ -1,19 +1,18 @@
 #include <iostream> 
 #include <cstdlib> // C standard library, defines rand(), srand(), RAND_MAX
-#include <cctype>
+#include <cstring>
 using namespace std;
 
 int main() {
     //String manipulation
-    char messyString[] = "t6H0I9s6.iS.999a9.STRING";
-    char current = messyString[0];
-    for(int i=0; current != '\0'; current = messyString[++i])
-    {
-        if(isalpha(current))
-            cout << char(isupper(current) ? tolower(current) : current);
-        else if(ispunct(current))
-            cout << ' ';
-    }
+    char fragment1[] = "I'm a s";
+    char fragment2[] = "tring!";
+    char fragment3[20];
+    char finalstring[20] = "";
+    //strcpy(fragment3, fragment1);
+    strcat(finalstring, fragment1);
+    strcat(finalstring, fragment2);
+    cout << finalstring;
     cout << endl;
     return 0;
 }
