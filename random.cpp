@@ -1,12 +1,25 @@
 #include <iostream>
-#include <vector>
+#include <cmath>
 using namespace std;
+
+double calcPi(const int number)
+{
+   int count = 0;
+   srand(time(0));
+   double x = rand() / (double) RAND_MAX;
+   double y = rand() / (double) RAND_MAX;
+   if(sqrt(x*x + y*y) < 1)
+     count++;
+
+   return (count / static_cast<double>(number)) * 4;
+}
+
 int main()
 {
-  const int ARRAY_LEN = 100;
-  int arr[ARRAY_LEN];
-  int *p = arr;
-  int *q = &arr[0];
-  arr[0] = 90;
-  cout <<"Value of variable q is " << *q;
+  int n;
+  cout << "Insert the number of dart throws: ";
+  cin >> n;
+  cout << "The value of Pi is: "<< calcPi(n);
+
+  return 0;
 }
