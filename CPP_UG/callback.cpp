@@ -18,6 +18,7 @@ void callback(func func_) {
 
 int main() {
     //declare function pointers
+    static callback s_callback;
     void(*intCallback)(int) = &printNumber;
     void(*stringCallback)(const std::string&) = printString;
 
