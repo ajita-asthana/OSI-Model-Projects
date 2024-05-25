@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/time.h>
 #include <arpa/inet.h>
 #include <errno.h>
 
@@ -29,13 +30,16 @@ void connect_to_server(int socket_fd, const char *server_ip, int port) {
     }
 }
 
-void communicate_with_server(int socket_fd) {
+void communicate_with_server(int socket_fd, struct timeval start, struct timeval end) {
     char buffer[BUFFER_SIZE] = {0};
     char *hello = "Hello from client";
+
+    gettimeofday(&start, NULL);
     send(socket_fd, hello, strlen(hello), 0);
     printf("Hello message sent\n");
-    read(socket_fd, buffer, BUFFER_SIZE);
+    int bytes_read = read(socket_fd, buffer, BUFFER_SIZE);
     printf("Message from server: %s\n", buffer);
+    gettimeofday(&end, NULL);
 }
 
 int create_socket() {
@@ -46,13 +50,22 @@ int create_socket() {
     }
     return socket_fd;
 }
+
+double calculate_rtt(struct timeval start, struct timeval end) {
+    return (double)(end.tv_usec - start.tv_usec) / 1000;
+}
+
 int main(int argc, char const *argv[]) {
+    struct timeval start, end;
     const char *server_ip = "127.0.0.1";
     int port = (argc > 1) ? atoi(argv[1]) : DEFAULT_PORT;
 
     int socket_fd = create_socket();
     connect_to_server(socket_fd, server_ip, port);
-    communicate_with_server(socket_fd);
+    communicate_with_server(socket_fd, start, end);
+
+    double rtt = calculate_rtt(start, end);
+    printf("RTT: %.3f ms\n", rtt);
     close(socket_fd);
 
     return 0;
