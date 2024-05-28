@@ -4,6 +4,7 @@
         "utility": "cpp",
         "iosfwd": "cpp",
         "vector": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "chrono": "cpp"
     }
 }
