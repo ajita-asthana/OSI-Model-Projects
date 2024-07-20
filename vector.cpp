@@ -1,10 +1,8 @@
 #include <vector>
+#include <iostream>
 int main() 
 {
-    std::vector<int> vec;
-    for(int i=1; i<=5; i++)
-    {
-        vec.push_back(i);
-    }
+    int compute = 2 * 21;
+    std::cout << "Compute is " << compute << std::endl;
     return 0;
 }
